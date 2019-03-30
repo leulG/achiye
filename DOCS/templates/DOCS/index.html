@@ -1,0 +1,59 @@
+
+
+{%include '../header.html'%}
+    
+{%block body%}
+       
+               <section style="margin-bottom: 20px;margin-top: 20px;">
+                    {% if  not latest_Docs %} 
+                    <div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+                            <div class="card">
+                              <div class="card-body">
+                                
+                                <h3 class = 'card-text text-center text-info' >Hoops No D:)ocument Has Been uploaded Yet 😍 </h3>
+                              </div>
+                            </div>
+                          </div>
+                       
+                           {% endif%}
+                {% for doc in latest_Docs%}
+                <div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+                        <div class="card">
+                          <div class="card-body">
+                            <h4 class="card-title">{{doc.Title}}</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">subtitle</h6>
+                            <p class="card-text">{{doc.Description}}</p>
+                            <p class="text-right text-danger card-title" >{{doc.Type}}</p>
+                            <a href="{{doc.File.url}}" class = 'btn btn-primary'> download</a>
+                            <p class = 'card-text text-right text-info'> date published: {{doc.pub_date}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      {% endfor %}
+                      <div class="pagination">
+                          <span class="step-links">
+                              {% if latest_Docs.has_previous %}
+                                  <a href="?page=1">&laquo; first</a>
+                                  <a href="?page={{ latest_Docs.previous_page_number }}">previous</a>
+                              {% endif %}
+                        
+                              <span class="current">
+                                  Page {{ latest_Docs.number }} of {{latest_Docs.paginator.num_pages }}.
+                              </span>
+                        
+                              {% if latest_Docs.has_next %}
+                                  <a href="?page={{ latest_Docs.next_page_number }}">next</a>
+                                  <a href="?page={{ latest_Docs.paginator.num_pages }}">last &raquo;</a>
+                              {% endif %}
+                          </span>
+                        </div>
+                        </section>
+                
+         
+  {%endblock%}
+  {%include '../footer.html'%}
+        
+        
+                                                                                              
+

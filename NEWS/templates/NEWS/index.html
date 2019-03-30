@@ -1,0 +1,65 @@
+{% include './header.html' %}
+{%block body%}
+
+   
+           
+<div class="container">
+    <div class = 'row'>
+        <div class = 'col-md-12'>
+            
+    <section style="margin-bottom: 20px;margin-top: 20px;">   
+        {% if  not latest_News %} 
+        <div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+                <div class="card">
+                  <div class="card-body">
+                    
+                    <h4 class = 'card-text text-right text-info'> No News</h4>
+                  </div>
+                </div>
+              </div>
+           
+               {% endif%}
+            
+                  {% for news in latest_News %}
+                  <div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+                          <div class="card">
+                            <div class="card-body">
+                              {% if news.Image %}
+             
+                                  <img src="{{news.Image.url}}" class="img-fluid" alt="Responsive image">
+                              {% endif %}
+                              <h4 class="card-title">{{news.Title}}</h4> 
+                              <a href=" {% url 'News:detail' news.id%}" class ="card-title">read more?</a>
+                              <p class = 'card-text text-right text-info'> date published: {{news.pub_date}}</p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                    {%endfor%}
+        
+  <div class="pagination">
+    <span class="step-links">
+        {% if latest_News.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ latest_News.previous_page_number }}">previous</a>
+        {% endif %}
+  
+        <span class="current">
+            Page {{ latest_News.number }} of {{ latest_News.paginator.num_pages }}.
+        </span>
+  
+        {% if latest_News.has_next %}
+            <a href="?page={{ latest_News.next_page_number }}">next</a>
+            <a href="?page={{ latest_News.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+        
+      </section>
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}
+{% include '../footer.html'%}

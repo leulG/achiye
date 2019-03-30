@@ -1,0 +1,37 @@
+{% include '../header.html' %}
+{% load crispy_forms_tags %}
+{% block body%}
+    {% if err%}
+    <section style="margin-bottom: 20px;margin-top: 20px;">
+            <div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+                <div class="card">
+                <div class="card-body">
+                    
+                    <h4 class="text-center text-danger card-title">{{err}}</h4> 
+                        
+                    </div>
+                </div>
+            </div>
+            </section>
+    {% else %}
+
+  
+    <section style="margin-bottom: 20px;margin-top: 20px;">
+    <div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+        <div class="card">
+          <div class="card-body">
+            
+            <h4 class="text-center text-info card-title">User {{title}} Form</h4> 
+                <form method='POST' enctype="multipart/form-data">{%csrf_token%}
+                    {{form | crispy}}
+                <input class = 'btn btn-success' type="submit" value = 'SUBMIT  '/>
+               </form>
+            </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+    
+
+    {% endblock %}
+{% include '../footer.html'%}

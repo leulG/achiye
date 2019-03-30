@@ -1,0 +1,17 @@
+{% include '../header.html'%}
+{% block body%}
+
+<section style="margin-bottom: 20px;margin-top: 20px;">
+<div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">{{service.Title}}</h4>
+            <h6 class="card-subtitle mb-2 text-muted">subtitle</h6>
+            <p class="card-text">{{service.Description}}</p>
+            <p class = 'card-text text-right text-info'> date published: {{service.pub_date}}</p>
+          </div>
+        </div>
+      </div>
+</section>
+{%endblock%}
+{% include '../footer.html'%}

@@ -1,0 +1,108 @@
+{% include '../header.html' %}
+{% load crispy_forms_tags %}
+
+{% block body%}
+{% if err%}
+  <section style="margin-bottom: 20px;margin-top: 20px;">
+          <div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+              <div class="card">
+                <div class="card-body">
+                  
+                  <h4 class="text-center text-danger card-title">{{err}}</h4> 
+                    
+                  </div>
+              </div>
+            </div>
+          </section>
+{% elif userr %}
+{% for u in userr%}
+<section style="margin-bottom: 20px;margin-top: 20px;">
+  <div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+    <div class="card">
+      <div class="card-body">
+
+        
+    <a href="{% url 'Users:edituser' u.id %}">
+      <h4 class="text-center text-danger card-title">{{u.username}}</h4>
+    </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endfor %}
+{% else %}
+    <section >
+        <div class="col-md-8 offset-md-2" style="margin-top: 10px;margin-bottom: 20px;">
+            <div class="card">
+              <div class="card-body">
+                
+                <div class="container my-auto">
+                  <div class="row">
+                    <div class="col-lg-10 mx-auto">
+                      <h1 class="text-uppercase">
+                         <p class="text-center">{{request.user.username}}'s profile</p>
+                      </h1>
+                    
+                    </div>
+                  </div>
+                </div> 
+                   <p class = "text-info" >name: <strong class="text-success">{{request.user.username}}</strong> </p><hr>
+
+                   <p>email: </p><h5>{{request.user.email}}</h5>
+                   {%if request.user.is_staff %}
+
+                    <p>role: <strong>staff</strong></p>
+                   
+                   {% else %}
+
+                    <p>role: active user</p>
+
+                   {% endif %}
+                   <p class="text-right">date joined: {{request.user.date_joined}}</p>
+                   <p class="text-center">last login: {{request.user.last_login}}</p>
+                </div>
+            </div>
+          </div>
+        </section>
+        
+          
+        
+         {% for order in orders%}
+        
+            {% if request.user == order.user %}
+            
+            <section style="margin-bottom: 10px;margin-top: 10px;">
+             <div class="col-md-8 offset-md-2" style="margin-top: 5px;">
+                <div class="card">
+                  <div class="card-body">
+                    
+                        <p>{{order.Title}}</p>
+                        {% if order.File %}
+                          <p><a href="{{order.File.url}}">{{order.File}}</a></p>
+                        {% endif %}
+                        <p>{{order.Description}}</p>
+                        {% if   order.was_published_recently %}
+                          <a class = "btn btn-warning btn-small" href="{%url 'Users:edit' order.id%}">Edit</a>
+                          <a class = "btn btn-danger btn-small" href="{%url 'Users:pre_delete' order.id %}">Delete</a>
+                          
+                        
+                        {%else%}
+                        <p class="text-info text-right">already on development cant make <br> changes if its nessesory
+                           please talk <br>to the admin and see if things could work out
+                          </p>
+                         
+                        {% endif %}
+                        <p class="text-right">{{order.pub_date}}</p>
+                </div>
+              </div>
+
+            </section>
+            {% endif %}
+
+
+        {% endfor %}
+        {% endif %}
+        
+    {% endblock %}
+{% include '../footer.html'%}

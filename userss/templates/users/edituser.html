@@ -1,0 +1,35 @@
+{% include '../header.html' %}
+{% load crispy_forms_tags %}
+{% block body%}
+
+
+<section style="margin-bottom: 20px;margin-top: 20px;">
+    <div class="container col-md-8 offset-md-2" style="margin-top: 10px;">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="text-center card-title">Sign In</h4>
+                <p>{{user.username}}</p>
+                {% if objs%}
+                    {% for obj in objs%}
+                        <p>{{obj.Title}}</p>
+                <a class="btn btn-warning btn-small" href="{%url 'Users:edit' obj.id%}">Edit</a>
+                        <form method='POST' action="{% url 'Users:delete' obj.id %}" enctype="multipart/form-data">{%csrf_token%}
+
+                            <input class='btn btn-danger' type="submit" value='YES' />
+                            <a class="btn btn-warning btn-small" href="{%url 'Users:profile' %}">cancel</a>
+                        </form>
+                                                
+                    {% endfor %}
+                    
+                    
+                {% endif%}
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
+{% include '../footer.html'%}

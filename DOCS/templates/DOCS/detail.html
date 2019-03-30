@@ -1,0 +1,24 @@
+{%include '../header.html'%}
+    
+{%block body%}
+                <section class="container" style="margin-top: 20px; margin-bottom: 20px;">
+                    <div class="col-md-10">
+                      <div class="d-flex p-2">
+                        <div class="media">
+                          <div class="media-body">
+                            <h5 class="mt-0 mb-1 d-title">{{Doc.Title}}</h5><br>
+                           <p>{{Doc.Description}}</p>  <br>
+                          
+                          <a href="{{Doc.File.url}}" class = 'btn btn-primary'> download</a>
+                       
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p class = 'card-text text-right text-info'> date published: {{Doc.pub_date}}</p><br>
+                    </section>
+                    <hr>
+              
+          {%endblock%}
+  {%include '../footer.html'%}
+        

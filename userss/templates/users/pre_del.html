@@ -1,0 +1,23 @@
+{% include '../header.html' %}
+    {% load crispy_forms_tags %}
+    {% block body%}
+    <section style="margin-bottom: 20px;margin-top: 20px;">
+        <div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+            <div class="card">
+              <div class="card-body">
+                
+                <h4 class="text-center text-danger card-title">{{Title}} "{{Obj}}" ?</h4> 
+                <p class = 'text-info'> note all things releted to it will be gone!</p>
+                    <form method='POST' action="{% url 'Users:delete' Obj.id %}" enctype="multipart/form-data">{%csrf_token%}
+                       
+                    <input class = 'btn btn-danger' type="submit" value = 'YES'/>
+                    <a class = "btn btn-warning btn-small" href="{%url 'Users:profile' %}">cancel</a>
+                   </form>
+                   
+
+                </div>
+            </div>
+          </div>
+        </section> 
+    {%endblock%}
+{%include '../footer.html'%}

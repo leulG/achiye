@@ -1,0 +1,23 @@
+{% include '../header.html'%}
+    {%block body%}
+    <section style="margin-bottom: 20px;margin-top: 20px;">    
+       
+            {% for structure in structures %}
+                  <div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+                    <a href="{{structure.Image.url}}">
+                          <div class="card">
+                            <div class="card-body">
+                              
+             
+                             <img src="{{structure.Image.url}}" class="img-fluid" alt="Responsive image">
+                              
+                              <h4 class="card-title">{{structure.Title}}</h4> 
+                            <p class = 'card-text text-right text-info'> date published: {{structure.pub_date}}</p>
+                            </div>
+                          </div>
+                        </a>
+                        </div>
+                        
+                   {%endfor%}
+    {% endblock%}
+{% include '../footer.html'%}

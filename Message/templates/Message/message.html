@@ -1,0 +1,53 @@
+{% include '../header.html' %}
+{% load crispy_forms_tags %}
+{% block body%}
+{% if users %}
+<section style="margin-bottom: 20px;margin-top: 20px;">
+    {% for user in users %}
+    <div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+        <div class="card">
+            <div class="card-body">
+           
+              <a href="{%url 'message:detail' user.id%}"><h3>{{user.username}}</h3></a>  
+           
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+</section>
+{% elif user%}
+<section style="margin-bottom: 20px;margin-top: 20px;">
+
+    {% for message in messages %}
+    <div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+        <div class="card">
+            <div class="card-body">
+
+                <a href="{%url 'message:detail' user.id%}">
+                    <h3>{{message}}</h3>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+</section>
+
+{% else %}
+<section style="margin-bottom: 20px;margin-top: 20px;">
+    <div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+        <div class="card">
+            <div class="card-body">
+                <form method='POST' enctype="multipart/form-data">{%csrf_token%}
+                    {{form | crispy}}
+                    <input class='btn btn-success' type="submit" value='SUBMIT  ' />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif%}
+{% endblock %}
+{% include '../footer.html'%}

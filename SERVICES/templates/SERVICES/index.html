@@ -1,0 +1,43 @@
+{% include './header.html'%}
+{%block body%}
+
+    <section style="margin-bottom: 20px;margin-top: 20px;">    
+       
+            {% for service in services%} 
+              <div class="col-md-8 offset-md-2" style="margin-top: 10px;">
+                <a class="portfolio-box" href="{%url 'Service:detail' service.id%}" width="650" height="350">
+
+                    <div class="card">
+                      <div class="card-body">
+                        <p class="">{{service.Title}}</p>
+                        <p class = 'card-text text-right text-info'> date published: {{service.pub_date}}</p>
+                      </div>
+                    </div>
+                    </a>
+                  </div>
+                  {% endfor %}
+                  <div class="pagination">
+                    <span class="step-links">
+                        {% if services.has_previous %}
+                            <a href="?page=1">&laquo; first</a>
+                            <a href="?page={{ services.previous_page_number }}">previous</a>
+                        {% endif %}
+                  
+                        <span class="current">
+                            Page {{services.number }} of {{ services.paginator.num_pages }}.
+                        </span>
+                  
+                        {% if services.has_next %}
+                            <a href="?page={{ services.next_page_number }}">next</a>
+                            <a href="?page={{ services.paginator.num_pages }}">last &raquo;</a>
+                        {% endif %}
+                    </span>
+                  </div>
+                        
+           
+      
+</section>
+   
+
+{%endblock%}
+{% include '../footer.html'%}
